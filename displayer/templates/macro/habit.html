@@ -1,0 +1,46 @@
+<table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th><a href="{% url 'habit:create' %}">create habit +</a></th>
+        {% for day in last7Days %}
+            <th>{{ day }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+        {% for habit, entries, todaySet in entryData %}
+        <tr>
+            <th scope="row">{{ habit.title }}
+                <a class="confirm" href="{% url 'habit:deleteHabit' habit.id %}">del</a>
+            </th>
+            {% for entry in entries %}
+            <td>
+                {% if entry is not None %}
+                    {% if habit.habitIsDecimal %}
+                        {{entry.value}}
+                    {% else %}
+                        1
+                    {% endif %}
+                {% endif %}    
+            </td>
+            {% endfor %}
+            <td>
+                {% if todaySet is not True %}
+                    {% if habit.habitIsDecimal %}
+                        <form action="{% url 'habit:createHabitEntryDeciaml' habit.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="number" step='0.01' name="entryVal" id=""/>
+                            <input class="confirm" type="submit" value="set val">
+                        </form>
+                    {% else %}
+                        <a class="confirm" href="{% url 'habit:createHabitEntryBool' habit.id %}">set today</a>
+                    {% endif %}                
+                {% else %}
+                Already set
+                {% endif %}
+            </td>
+        
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
