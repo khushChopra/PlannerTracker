@@ -1,0 +1,15 @@
+<a href="{% url 'goals:createMainGoal' %}">Create</a>
+<br>
+Short term
+<ul class="list-group">
+    {% for goal in listMainGoalst2 %}
+    <li class="list-group-item">{{ goal.title }}, <a href="{% url 'goals:markMainGoalDone' goal.id %}">Done</a></li>
+    {% endfor %}
+</ul>
+
+Long term
+<ul class="list-group">
+    {% for goal in listMainGoalst1 %}
+    <li class="list-group-item">{{ goal.title }}, <a href="{% url 'goals:markMainGoalDone' goal.id %}">Done</a></li>
+    {% endfor %}
+</ul>

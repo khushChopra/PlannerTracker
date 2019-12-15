@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'goals.apps.GoalsConfig',
     'habits.apps.HabitsConfig',
     'displayer.apps.DisplayerConfig',
     'django.contrib.admin',

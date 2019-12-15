@@ -1,0 +1,6 @@
+<h3>Daily Note</h3>
+<form action="{% url 'goals:createOrUpdateDailyNote' todaysNote.entryDate %}" method="post">
+    {% csrf_token %}
+    <textarea name="content" id="" value="">{{ todaysNote.content }}</textarea>
+    <input type="submit" value="Save">
+</form>
