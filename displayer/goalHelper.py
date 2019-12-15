@@ -11,3 +11,13 @@ def getDailyNote():
     except Exception as e:
         todaysNote = DailyNote(content="")
     return todaysNote
+
+def getMainGoals():
+    ## get teir 1 goals
+    listMainGoalst1 = MainGoals.objects.filter(isComplete = False, isLongTerm=True)
+    listMainGoalst1 |= MainGoals.objects.filter(isComplete = True, isLongTerm=True, completeDate=datetime.now())
+    
+    ## get tier 2 goals
+    listMainGoalst2 = MainGoals.objects.filter(isComplete = False, isLongTerm=False)
+    listMainGoalst2 |= MainGoals.objects.filter(isComplete = True, isLongTerm=False, completeDate=datetime.now())
+    return listMainGoalst1, listMainGoalst2

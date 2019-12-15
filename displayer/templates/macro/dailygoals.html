@@ -1,0 +1,30 @@
+<table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Day</th>
+        <th>goals</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+        <a href="{% url 'goals:createDailyGoal' %}" class="">Add</a>
+        {% for date, goals in dailyGoalData %}
+         
+            <tr>
+                <th scope="row">{{ date }} </th>
+                <td>
+                    <ul>
+                        {% for goal in goals %}
+                            {% if goal.isComplete %}
+                                <li><strike>{{ goal.title }}</strike></li>
+                            {% else %}
+                                <li>{{ goal.title }} <a href="{% url 'goals:markDailyGoalDone' goal.id %}" class="">Mark done</a></li>
+                            {% endif %}
+                            
+                        {% endfor %}  
+                    </ul>
+                </td>        
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>

@@ -3,13 +3,27 @@
 Short term
 <ul class="list-group">
     {% for goal in listMainGoalst2 %}
-    <li class="list-group-item">{{ goal.title }}, <a href="{% url 'goals:markMainGoalDone' goal.id %}">Done</a></li>
+        {% if not goal.isComplete %}
+            <li class="list-group-item">{{ goal.title }}, <a href="{% url 'goals:markMainGoalDone' goal.id %}">Done</a></li>
+        {% endif %}    
+    {% endfor %}
+    {% for goal in listMainGoalst2 %}
+        {% if goal.isComplete %}
+            <li class="list-group-item"> <strike>{{ goal.title }}</strike></li>
+        {% endif %}    
     {% endfor %}
 </ul>
 
 Long term
 <ul class="list-group">
     {% for goal in listMainGoalst1 %}
-    <li class="list-group-item">{{ goal.title }}, <a href="{% url 'goals:markMainGoalDone' goal.id %}">Done</a></li>
+        {% if not goal.isComplete %}
+            <li class="list-group-item">{{ goal.title }}, <a href="{% url 'goals:markMainGoalDone' goal.id %}">Done</a></li>
+        {% endif %}    
+    {% endfor %}
+    {% for goal in listMainGoalst1 %}
+        {% if goal.isComplete %}
+            <li class="list-group-item"> <strike>{{ goal.title }}</strike></li>
+        {% endif %}    
     {% endfor %}
 </ul>

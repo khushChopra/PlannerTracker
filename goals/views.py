@@ -36,3 +36,15 @@ def markMainGoalDone(request, pk):
     myMainGoal.completeDate = datetime.now()
     myMainGoal.save()
     return HttpResponseRedirect(reverse('home'))
+
+class createDailyGoal(CreateView):
+    model = DailyGoals
+    template_name = "maingoalform.html"
+    fields = '__all__'
+    success_url = reverse_lazy('home')
+
+def markDailyGoalDone(request, pk):
+    myDailyGoal = DailyGoals.objects.get(pk=pk)
+    myDailyGoal.isComplete = True
+    myDailyGoal.save()
+    return HttpResponseRedirect(reverse('home'))

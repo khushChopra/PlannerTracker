@@ -7,7 +7,7 @@ from django.utils.dates import WEEKDAYS_ABBR
 from habits.models import Habit, HabitEntryBool, HabitEntryDecimal
 from goals.models import DailyNote, DailyGoals, MainGoals
 from .habitHelper import getHabitData
-from .goalHelper import getDailyNote
+from .goalHelper import getDailyNote, getMainGoals
 
 
 # Create your views here.
@@ -19,13 +19,15 @@ def homeView(request):
     todaysNote = getDailyNote()
 
     # main goals
-    ## get teir 1 goals
-    listMainGoalst1 = MainGoals.objects.filter(isComplete = False, isLongTerm=True)
-    ## get tier 2 goals
-    listMainGoalst2 = MainGoals.objects.filter(isComplete = False, isLongTerm=False)
+    listMainGoalst1, listMainGoalst2 = getMainGoals()
 
+    # get last 2 and next 4 days
+    # format for table display
+    dailyGoalData = []
+    for day in [datetime.now()+timedelta(days=x) for x in range(-2,5)]:
+        goals = DailyGoals.objects.filter(entryDate=day)
+        dailyGoalData.append((day, goals)) 
     
-
     context = {
         'timenow': timezone.now(),
         'entryData': entryData,
@@ -34,5 +36,6 @@ def homeView(request):
         'todaysNote': todaysNote,
         'listMainGoalst1': listMainGoalst1,
         'listMainGoalst2': listMainGoalst2,
+        'dailyGoalData': dailyGoalData,
     }
     return render(request, 'home.html', context)
