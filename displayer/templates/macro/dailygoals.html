@@ -1,24 +1,33 @@
-<table class="table table-hover">
+{% load static %}
+<table class="table table-hover" style="margin-top:20px;">
     <thead class="thead-dark">
       <tr>
-        <th>Day</th>
-        <th>goals</th>
+        <th> 
+            <h3>
+                Day
+            </h3>
+        </th>
+        <th>
+            <h3>
+                Goals
+            </h3>
+        </th>
       </tr>
     </thead>
     
     <tbody>
-        <a href="{% url 'goals:createDailyGoal' %}" class="">Add</a>
-        {% for date, goals in dailyGoalData %}
+        
+        {% for day, goals in dailyGoalData %}
          
-            <tr>
-                <th scope="row">{{ date }} </th>
+            <tr class="{% if forloop.counter is todaysDay %} active {% endif %}">
+                <th scope="row"><h3 class="table-row-index">{{day}}</h3></th>
                 <td>
                     <ul>
                         {% for goal in goals %}
                             {% if goal.isComplete %}
-                                <li><strike>{{ goal.title }}</strike></li>
+                                <li><del>{{ goal.title }}</del></li>
                             {% else %}
-                                <li>{{ goal.title }} <a href="{% url 'goals:markDailyGoalDone' goal.id %}" class="">Mark done</a></li>
+                                <li>{{ goal.title }} <a href="{% url 'goals:markDailyGoalDone' goal.id %}" class="confirm tick"><img style="height: 15px; padding-bottom: 1px;" src="{% static 'displayer/tick.png' %}"></a></li>
                             {% endif %}
                             
                         {% endfor %}  
@@ -27,4 +36,5 @@
             </tr>
         {% endfor %}
     </tbody>
-  </table>
+</table>
+<a class="btn btn-default" style="margin-bottom: 20px;" href="{% url 'goals:createDailyGoal' %}" class="">Add Daily Goal</a>

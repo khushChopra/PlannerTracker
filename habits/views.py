@@ -10,7 +10,7 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 class CreateHabit(CreateView):
     model = Habit
     template_name = 'form.html'
-    fields = '__all__'
+    fields = ['title','habitIsDecimal']
     success_url = reverse_lazy('home')
 
 def deleteHabit(request, pk):

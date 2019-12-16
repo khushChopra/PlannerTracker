@@ -1,0 +1,97 @@
+@font-face {
+    font-family: 'Lobster';
+    src: url('fonts/Lobster/Lobster-Regular.ttf');
+}
+@font-face {
+    font-family: 'Montserrat-Light';
+    src: url('fonts/Montserrat/Montserrat-Light.ttf');
+}
+@font-face {
+    font-family: 'Montserrat';
+    src: url('fonts/Montserrat/Montserrat-Regular.ttf');
+}
+
+a {
+    color: pink;
+    font-family: Montserrat;
+}
+
+h1 {
+    font-family: Lobster;
+    text-shadow: 2px 2px rgb(255, 240, 250);
+    font-size: 80px;
+}
+
+h4 {
+    font-family: Lobster;
+    text-shadow: 2px 2px rgb(255, 240, 250);
+    font-size: 30px;
+}
+
+h3 {
+    font-family: Lobster;
+    text-shadow: 2px 2px rgb(255, 240, 250);
+    font-size: 24px;
+    margin: 0;
+}
+
+thead {
+    background-color: rgb(255, 180, 205);
+}
+
+table {
+    box-shadow: 5px 5px rgb(207, 207, 207);
+    border: 2px solid rgb(207, 207, 207);
+}
+
+thead {
+    border: 1px solid white;
+}
+
+ul {
+    min-height: 50px;
+}
+
+.btn-default {
+    box-shadow: 2px 2px rgb(207, 207, 207);
+    width: 100%;
+    font-family: Montserrat;
+}
+
+.btn-default:hover {
+    background-color: rgb(255, 180, 205);
+}
+
+.table-row-index {
+    font-family: Montserrat;
+    font-size: 18px;
+}
+
+li {
+    font-family: Montserrat;
+}
+
+p.table-row-entry {
+    font-family: Montserrat;
+    padding: 0;
+    margin: 0;
+}
+
+.table-entry-border-right {
+    border-right: 1px solid rgb(207, 207, 207);
+}
+
+.form-control:focus {
+    box-shadow: 0px 0px rgb(255, 240, 250);
+}
+
+textarea.form-control {
+    font-family: Montserrat;
+    font-size: 18px;
+    min-height: 120px;
+    border: 0;
+    margin: 0;
+    resize: none;
+    box-shadow: 0px 0px rgb(255, 240, 250);
+    padding: 0;
+}

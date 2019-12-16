@@ -24,12 +24,21 @@ def homeView(request):
     # get last 2 and next 4 days
     # format for table display
     dailyGoalData = []
-    for day in [datetime.now()+timedelta(days=x) for x in range(-2,5)]:
+    weekStart = 0
+    while (datetime.now()+timedelta(days=weekStart)).isoweekday()!=1:
+        weekStart -=1
+    for day in [datetime.now()+timedelta(days=x) for x in range(weekStart,weekStart+7)]:
         goals = DailyGoals.objects.filter(entryDate=day)
-        dailyGoalData.append((day, goals)) 
+        dailyGoalData.append((format(day, "D, d M"), goals)) 
     
+    # todays day, and date
+
+    today = datetime.now()
+    today = format(today, "D, d M Y")
+    todaysDay = datetime.now().isoweekday()
     context = {
-        'timenow': timezone.now(),
+        'today': today,
+        'todaysDay': todaysDay,
         'entryData': entryData,
         'last7Dates': last7Dates,
         'last7Days': last7Days,

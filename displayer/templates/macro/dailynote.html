@@ -1,6 +1,22 @@
-<h3>Daily Note</h3>
+{% load static %}
 <form action="{% url 'goals:createOrUpdateDailyNote' todaysNote.entryDate %}" method="post">
-    {% csrf_token %}
-    <textarea name="content" id="" value="">{{ todaysNote.content }}</textarea>
-    <input type="submit" value="Save">
-</form>
+        {% csrf_token %}
+<table class="table" style="margin-top: 10px;">
+    <thead class="thead-dark">
+      <tr>
+        <th><h3>Daily Note</h3></th>
+      </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td class="table-entry-border-right {% if forloop.counter is todaysDay %}active{% endif %}">
+                <p class="table-row-entry">
+                        <textarea class="form-control" name="content" id="" value="">{{ todaysNote.content }}</textarea>
+                </p>
+            </td>        
+        </tr>
+    </tbody>
+</table>
+
+<input class="btn btn-default" type="submit" value="Save">

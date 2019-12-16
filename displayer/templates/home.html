@@ -1,11 +1,14 @@
+{% load static %}
 <html>
     <head>
         <title>
             PlannerTracker
         </title>
+
          <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
+        <link rel="stylesheet" type="text/css"  href="{% static 'displayer/base.css' %}">
+        
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -19,14 +22,58 @@
             });
         </script>
     </head>
-    <body>        
-        {% include 'macro/habit.html' %}
+    <body>
+        <div class="container" style="background-color: rgb(255, 180, 205); margin-bottom: 5px;">
+            <div class="row">
+                <div class="col-sm-12">
+                        <h1 class="text-center" style="border-bottom: 2px solid white;">Weekly Planner</h1>
+                        <h4 class="text-center">{{ today }} </h4>
+                </div>                
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                    {% include 'macro/dailygoals.html' %}
+                            </div>
+                            <div class="col-sm-12 col-md-12">
+                                    {% include 'macro/dailynote.html' %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                    {% include 'macro/maingoals.html' %}
+                            </div>
+                            <div class="col-sm-12 col-md-12">
+                                    {% include 'macro/habit.html' %}
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!-- <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        {% include 'macro/dailygoals.html' %}
+                    </div>
+
+                    <div class="col-sm-12 col-md-6">
+                        {% include 'macro/maingoals.html' %}
+                    </div>
+
+                    <div class="col-sm-12 col-md-6">
+                        {% include 'macro/habit.html' %}
+                    </div>
+
+                    <div class="col-sm-12 col-md-6">
+                        {% include 'macro/dailynote.html' %}
+                    </div>
+            </div> -->
+        </div>
         <hr>
-        {% include 'macro/dailynote.html' %}
-        <hr>
-        {% include 'macro/maingoals.html' %}
-        <hr>
-        {% include 'macro/dailygoals.html' %}
     </body>
 </html>
 

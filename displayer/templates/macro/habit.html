@@ -1,27 +1,33 @@
-<table class="table table-hover">
+{% load static %}
+<table class="table table-hover" style="margin-top: 10px;">
     <thead class="thead-dark">
       <tr>
-        <th><a href="{% url 'habit:create' %}">create habit +</a></th>
+        <th></th>
         {% for day in last7Days %}
-            <th>{{ day }}</th>
+            <th><h3>{{ day }}</h3></th>
         {% endfor %}
+        <th></th>
       </tr>
     </thead>
     <tbody>
         {% for habit, entries, todaySet in entryData %}
         <tr>
-            <th scope="row">{{ habit.title }}
-                <a class="confirm" href="{% url 'habit:deleteHabit' habit.id %}">del</a>
+            <th scope="row" class="table-entry-border-right">
+                <h3 class="table-row-index">{{ habit.title }}</h3>
+                <a class="confirm" href="{% url 'habit:deleteHabit' habit.id %}">Delete</a>
             </th>
             {% for entry in entries %}
-            <td>
-                {% if entry is not None %}
-                    {% if habit.habitIsDecimal %}
-                        {{entry.value}}
-                    {% else %}
-                        1
-                    {% endif %}
-                {% endif %}    
+            <td class="table-entry-border-right {% if forloop.counter is todaysDay %}active{% endif %}">
+                <p class="table-row-entry text-center">
+                    {% if entry is not None %}
+                        {% if habit.habitIsDecimal %}
+                            {{entry.value}}
+                        {% else %}
+                            <img alt="Mark complete" style="height: 15px; padding-bottom: 1px;" src="{% static 'displayer/check.png' %}">
+                        {% endif %}
+                    {% endif %} 
+                </p>
+                   
             </td>
             {% endfor %}
             <td>
@@ -29,18 +35,21 @@
                     {% if habit.habitIsDecimal %}
                         <form action="{% url 'habit:createHabitEntryDeciaml' habit.id %}" method="post">
                             {% csrf_token %}
-                            <input type="number" step='0.01' name="entryVal" id=""/>
-                            <input class="confirm" type="submit" value="set val">
+                            <input type="number" step='0.1' name="entryVal" id="" style="width: 70px;"/>
+                            <input class="btn btn-default" class="confirm" type="submit" value="Set">
                         </form>
                     {% else %}
-                        <a class="confirm" href="{% url 'habit:createHabitEntryBool' habit.id %}">set today</a>
+                        <a class="btn btn-default confirm" href="{% url 'habit:createHabitEntryBool' habit.id %}">Set</a>
                     {% endif %}                
                 {% else %}
-                Already set
+                    <p class="table-row-entry">
+                        Done
+                    </p>
                 {% endif %}
             </td>
         
         </tr>
         {% endfor %}
     </tbody>
-  </table>
+</table>
+<a class="btn btn-default" style="margin-bottom: 20px;" href="{% url 'habit:create' %}" class="">Add New Habit</a>

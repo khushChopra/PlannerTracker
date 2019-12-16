@@ -26,7 +26,7 @@ class HabitEntryDecimal(models.Model):
         Habit,
         on_delete = models.CASCADE
     )
-    value = models.DecimalField(max_digits=5, decimal_places=2) 
+    value = models.DecimalField(max_digits=4, decimal_places=1) 
     entryDate = models.DateField(blank=False, null=False, default=now)
 
     def __str__(self):
