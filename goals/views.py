@@ -61,12 +61,12 @@ def addDailyGoal(request, day):
 
     return render(request, 'dailygoalform.html', context=context)
 
-def getDateFromString(date):
+def getDateFromString(date, today=datetime.now()):
     weekStart = 0
-    while (datetime.now()+timedelta(days=weekStart)).isoweekday()!=1:
+    while (today+timedelta(days=weekStart)).isoweekday()!=1:
         weekStart -=1
     
-    for day in [datetime.now()+timedelta(days=x) for x in range(weekStart,weekStart+7)]:
+    for day in [today+timedelta(days=x) for x in range(weekStart,weekStart+7)]:
         if date == format(day, "D, d M"):
             return day
 
