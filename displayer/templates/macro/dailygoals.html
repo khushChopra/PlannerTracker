@@ -29,8 +29,10 @@
                             {% else %}
                                 <li>{{ goal.title }} <a href="{% url 'goals:markDailyGoalDone' goal.id %}" class="confirm tick"><img style="height: 15px; padding-bottom: 1px;" src="{% static 'displayer/tick.png' %}"></a></li>
                             {% endif %}
+                                
                             
                         {% endfor %}  
+                        <li><a href="{% url 'goals:addDailyGoal' day %}">Add task</a></li>
                     </ul>
                 </td>        
             </tr>

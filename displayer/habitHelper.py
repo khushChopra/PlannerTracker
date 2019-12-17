@@ -22,7 +22,6 @@ def getHabitData():
     for habit in allActiveHabits:
         tempArray = []
         todaySet = False
-        print(habit)
         for thisDate in last7Dates:
             if habit.habitIsDecimal:
                 try:
@@ -37,6 +36,5 @@ def getHabitData():
             tempArray.append(habitEntry)
             if format(thisDate,"d.m.y") == format(datetime.now(), "d.m.y") and habitEntry:
                 todaySet = True
-            print(thisDate, todaySet)
         entryData.append( (habit,  tempArray, todaySet) )
     return entryData, last7Days, last7Dates

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import createOrUpdateDailyNote, CreateMainGoal, markMainGoalDone, createDailyGoal, markDailyGoalDone
+from .views import createOrUpdateDailyNote, CreateMainGoal, markMainGoalDone, createDailyGoal, markDailyGoalDone, addDailyGoal, submitDailyGoal
 
 
 app_name='goals'
@@ -24,6 +24,7 @@ urlpatterns = [
     path('maingoal',  CreateMainGoal.as_view(), name="createMainGoal"),
     path('maingoal/<int:pk>/done',  markMainGoalDone, name="markMainGoalDone"),
     path('dailygoal',  createDailyGoal.as_view(), name="createDailyGoal"),
+    path('dailygoal/add/<day>',  addDailyGoal, name="addDailyGoal"),
+    path('dailygoal/addnew',  submitDailyGoal, name="submitDailyGoal"),
     path('dailygoal/<int:pk>/done',  markDailyGoalDone, name="markDailyGoalDone"),
-
 ]
